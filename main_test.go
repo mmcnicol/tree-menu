@@ -15,8 +15,8 @@ func TestBuildUsingDisplayModeByDate(t *testing.T) {
 
 	want := `root
   2023
-    - Date: 2023-11-23, Specialty: Cardiology, Type: Discharge Summary
-    - Date: 2023-11-01, Specialty: Neurology, Type: Progress Note
+    - Date: 2023-11-23, Specialty: Neurology, Type: Progress Note
+    - Date: 2023-11-01, Specialty: Cardiology, Type: Discharge Summary
     - Date: 2023-05-23, Specialty: Cardiology, Type: Lab Result
   2022
     - Date: 2022-11-23, Specialty: Cardiology, Type: Discharge Summary
@@ -67,7 +67,7 @@ func TestBuildUsingDisplayModeBySpecialty(t *testing.T) {
 	want := `root
   Cardiology
     Discharge Summary
-      - Date: 2023-11-23, Specialty: Cardiology, Type: Discharge Summary
+      - Date: 2023-11-01, Specialty: Cardiology, Type: Discharge Summary
       - Date: 2022-11-23, Specialty: Cardiology, Type: Discharge Summary
       - Date: 2017-10-27, Specialty: Cardiology, Type: Discharge Summary
       - Date: 2010-01-02, Specialty: Cardiology, Type: Discharge Summary
@@ -77,7 +77,7 @@ func TestBuildUsingDisplayModeBySpecialty(t *testing.T) {
       - Date: 2014-11-23, Specialty: Cardiology, Type: Lab Result
   Neurology
     Progress Note
-      - Date: 2023-11-01, Specialty: Neurology, Type: Progress Note
+      - Date: 2023-11-23, Specialty: Neurology, Type: Progress Note
       - Date: 2022-09-15, Specialty: Neurology, Type: Progress Note
       - Date: 2021-06-21, Specialty: Neurology, Type: Progress Note
 `
@@ -101,7 +101,7 @@ func TestBuildUsingDisplayModeBySpecialty(t *testing.T) {
 
 		// Print the diff
 		//fmt.Println(text)
-		t.Errorf("ToString output is incorrect.\nDiff:\n%s\n\n%v+\n\n", text, builder.TreeNode)
+		t.Errorf("ToString output is incorrect.\nDiff:\n%s\n", text)
 	} else {
 		fmt.Println(got)
 	}
@@ -116,7 +116,7 @@ func TestBuildUsingDisplayModeByType(t *testing.T) {
 	want := `root
   Discharge Summary
     Cardiology
-      - Date: 2023-11-23, Specialty: Cardiology, Type: Discharge Summary
+      - Date: 2023-11-01, Specialty: Cardiology, Type: Discharge Summary
       - Date: 2022-11-23, Specialty: Cardiology, Type: Discharge Summary
       - Date: 2017-10-27, Specialty: Cardiology, Type: Discharge Summary
       - Date: 2010-01-02, Specialty: Cardiology, Type: Discharge Summary
@@ -127,7 +127,7 @@ func TestBuildUsingDisplayModeByType(t *testing.T) {
       - Date: 2014-11-23, Specialty: Cardiology, Type: Lab Result
   Progress Note
     Neurology
-      - Date: 2023-11-01, Specialty: Neurology, Type: Progress Note
+      - Date: 2023-11-23, Specialty: Neurology, Type: Progress Note
       - Date: 2022-09-15, Specialty: Neurology, Type: Progress Note
       - Date: 2021-06-21, Specialty: Neurology, Type: Progress Note
 `
@@ -151,7 +151,7 @@ func TestBuildUsingDisplayModeByType(t *testing.T) {
 
 		// Print the diff
 		//fmt.Println(text)
-		t.Errorf("ToString output is incorrect.\nDiff:\n%s\n\n%v+\n\n", text, builder.TreeNode)
+		t.Errorf("ToString output is incorrect.\nDiff:\n%s\n", text)
 	} else {
 		fmt.Println(got)
 	}
@@ -161,12 +161,12 @@ func getCDSDocuments() []Document {
 
 	documents := []Document{
 		{
-			Date:      time.Date(2023, 11, 23, 14, 30, 45, 100, time.Local),
+			Date:      time.Date(2023, 11, 01, 14, 30, 45, 100, time.Local),
 			Specialty: "Cardiology",
 			Type:      "Discharge Summary",
 		},
 		{
-			Date:      time.Date(2023, 11, 01, 14, 30, 45, 100, time.Local),
+			Date:      time.Date(2023, 11, 23, 14, 30, 45, 100, time.Local),
 			Specialty: "Neurology",
 			Type:      "Progress Note",
 		},

@@ -45,6 +45,7 @@ func (n *TreeNodeBuilder) Build() {
 	default:
 		panic(fmt.Sprintf("Unknown display mode: %s", string(n.DisplayMode)))
 	}
+	n.TreeNode.SortNodeDocumentsRecursive()
 }
 
 func (n *TreeNodeBuilder) ToString() string {

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sort"
 )
 
 // TreeNode represents a node in the tree menu.
@@ -14,8 +15,9 @@ type TreeNode struct {
 // NewTreeNode creates a new TreeNode with the given name.
 func NewTreeNode(name string) *TreeNode {
 	return &TreeNode{
-		Name:     name,
-		Children: make([]*TreeNode, 0),
+		Name:      name,
+		Children:  make([]*TreeNode, 0),
+		Documents: make([]Document, 0),
 	}
 }
 
@@ -42,6 +44,17 @@ func (n *TreeNode) GetOrCreateChild(name string) *TreeNode {
 	newChild := NewTreeNode(name)
 	n.AddChild(newChild)
 	return newChild
+}
+
+func (n *TreeNode) SortNodeDocumentsRecursive() {
+    // Sort the Documents slice by date, most recent first
+    sort.Slice(n.Documents, func(i, j int) bool {
+        return n.Documents[i].Date.After(n.Documents[j].Date)
+    })
+
+    for _, child := range n.Children {
+        child.SortNodeDocumentsRecursive()
+    }
 }
 
 // ToString converts the tree structure to a string representation.
