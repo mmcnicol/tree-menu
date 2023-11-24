@@ -6,10 +6,10 @@ import (
 
 // Document represents a clinical document in the tree menu.
 type Document struct {
-    Date            time.Time
-    Specialty       string
-    Type            string
-    DocumentSource  string
+	Date           time.Time
+	Specialty      string
+	Type           string
+	DocumentSource string
 }
 
 // Implement the sort.Interface for sorting by date.

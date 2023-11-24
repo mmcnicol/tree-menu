@@ -6,22 +6,22 @@ import (
 
 // TreeNode represents a node in the tree menu.
 type TreeNode struct {
-    Name      string
-    Children []*TreeNode
-    Documents []Document
+	Name      string
+	Children  []*TreeNode
+	Documents []Document
 }
 
 // NewTreeNode creates a new TreeNode with the given name.
 func NewTreeNode(name string) *TreeNode {
-    return &TreeNode{
-        Name:      name,
-        Children:  make([]*TreeNode, 0),
-    }
+	return &TreeNode{
+		Name:     name,
+		Children: make([]*TreeNode, 0),
+	}
 }
 
 // AddChild adds a child node to the current node.
 func (n *TreeNode) AddChild(child *TreeNode) {
-    n.Children = append(n.Children, child)
+	n.Children = append(n.Children, child)
 }
 
 // AddDocument adds a document to the node.
@@ -31,17 +31,17 @@ func (n *TreeNode) AddDocument(doc Document) {
 
 // GetOrCreateChild gets an existing child node or creates a new one.
 func (n *TreeNode) GetOrCreateChild(name string) *TreeNode {
-    // Check if a child with the specified name already exists
-    for _, child := range n.Children {
-        if child.Name == name {
-            return child
-        }
-    }
+	// Check if a child with the specified name already exists
+	for _, child := range n.Children {
+		if child.Name == name {
+			return child
+		}
+	}
 
-    // If not, create a new child node, add it to the current node, and return it
-    newChild := NewTreeNode(name)
-    n.AddChild(newChild)
-    return newChild
+	// If not, create a new child node, add it to the current node, and return it
+	newChild := NewTreeNode(name)
+	n.AddChild(newChild)
+	return newChild
 }
 
 // ToString converts the tree structure to a string representation.
