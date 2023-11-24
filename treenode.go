@@ -10,6 +10,7 @@ type TreeNode struct {
 	Name      string
 	Children  []*TreeNode
 	Documents []Document
+	DocumentCount int
 }
 
 // NewTreeNode creates a new TreeNode with the given name.
@@ -18,6 +19,7 @@ func NewTreeNode(name string) *TreeNode {
 		Name:      name,
 		Children:  make([]*TreeNode, 0),
 		Documents: make([]Document, 0),
+		DocumentCount: 0,
 	}
 }
 
@@ -57,10 +59,23 @@ func (n *TreeNode) SortNodeDocumentsRecursive() {
     }
 }
 
+// UpdateDocumentCountRecursive updates the document count for the current node and its children.
+func (n *TreeNode) UpdateDocumentCountRecursive() {
+    // Initialize document count for the current node
+    n.DocumentCount = len(n.Documents)
+
+    // Update document count for each child node
+    for _, child := range n.Children {
+        child.UpdateDocumentCountRecursive()
+        // Add the child's document count to the current node's count
+        n.DocumentCount += child.DocumentCount
+    }
+}
+
 // ToString converts the tree structure to a string representation.
 func (n *TreeNode) ToString(indent string) string {
 	var result string
-	result += indent + n.Name + "\n"
+	result += fmt.Sprintf("%s%s (%d)\n", indent, n.Name, n.DocumentCount)
 
 	for _, child := range n.Children {
 		result += child.ToString(indent + "  ")

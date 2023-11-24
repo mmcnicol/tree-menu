@@ -13,23 +13,23 @@ func TestBuildUsingDisplayModeByDate(t *testing.T) {
 	builder.Build()
 	got := builder.ToString()
 
-	want := `root
-  2023
+	want := `root (10)
+  2023 (3)
     - Date: 2023-11-23, Specialty: Neurology, Type: Progress Note
     - Date: 2023-11-01, Specialty: Cardiology, Type: Discharge Summary
     - Date: 2023-05-23, Specialty: Cardiology, Type: Lab Result
-  2022
+  2022 (2)
     - Date: 2022-11-23, Specialty: Cardiology, Type: Discharge Summary
     - Date: 2022-09-15, Specialty: Neurology, Type: Progress Note
-  2021
+  2021 (1)
     - Date: 2021-06-21, Specialty: Neurology, Type: Progress Note
-  2019
+  2019 (1)
     - Date: 2019-11-23, Specialty: Cardiology, Type: Lab Result
-  2017
+  2017 (1)
     - Date: 2017-10-27, Specialty: Cardiology, Type: Discharge Summary
-  2014
+  2014 (1)
     - Date: 2014-11-23, Specialty: Cardiology, Type: Lab Result
-  2010
+  2010 (1)
     - Date: 2010-01-02, Specialty: Cardiology, Type: Discharge Summary
 `
 
@@ -64,19 +64,19 @@ func TestBuildUsingDisplayModeBySpecialty(t *testing.T) {
 	builder.Build()
 	got := builder.ToString()
 
-	want := `root
-  Cardiology
-    Discharge Summary
+	want := `root (10)
+  Cardiology (7)
+    Discharge Summary (4)
       - Date: 2023-11-01, Specialty: Cardiology, Type: Discharge Summary
       - Date: 2022-11-23, Specialty: Cardiology, Type: Discharge Summary
       - Date: 2017-10-27, Specialty: Cardiology, Type: Discharge Summary
       - Date: 2010-01-02, Specialty: Cardiology, Type: Discharge Summary
-    Lab Result
+    Lab Result (3)
       - Date: 2023-05-23, Specialty: Cardiology, Type: Lab Result
       - Date: 2019-11-23, Specialty: Cardiology, Type: Lab Result
       - Date: 2014-11-23, Specialty: Cardiology, Type: Lab Result
-  Neurology
-    Progress Note
+  Neurology (3)
+    Progress Note (3)
       - Date: 2023-11-23, Specialty: Neurology, Type: Progress Note
       - Date: 2022-09-15, Specialty: Neurology, Type: Progress Note
       - Date: 2021-06-21, Specialty: Neurology, Type: Progress Note
@@ -113,20 +113,20 @@ func TestBuildUsingDisplayModeByType(t *testing.T) {
 	builder.Build()
 	got := builder.ToString()
 
-	want := `root
-  Discharge Summary
-    Cardiology
+	want := `root (10)
+  Discharge Summary (4)
+    Cardiology (4)
       - Date: 2023-11-01, Specialty: Cardiology, Type: Discharge Summary
       - Date: 2022-11-23, Specialty: Cardiology, Type: Discharge Summary
       - Date: 2017-10-27, Specialty: Cardiology, Type: Discharge Summary
       - Date: 2010-01-02, Specialty: Cardiology, Type: Discharge Summary
-  Lab Result
-    Cardiology
+  Lab Result (3)
+    Cardiology (3)
       - Date: 2023-05-23, Specialty: Cardiology, Type: Lab Result
       - Date: 2019-11-23, Specialty: Cardiology, Type: Lab Result
       - Date: 2014-11-23, Specialty: Cardiology, Type: Lab Result
-  Progress Note
-    Neurology
+  Progress Note (3)
+    Neurology (3)
       - Date: 2023-11-23, Specialty: Neurology, Type: Progress Note
       - Date: 2022-09-15, Specialty: Neurology, Type: Progress Note
       - Date: 2021-06-21, Specialty: Neurology, Type: Progress Note
